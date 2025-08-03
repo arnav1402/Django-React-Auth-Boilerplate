@@ -1,7 +1,9 @@
 🚀 Project Structure
 
 root/
+
 ├── backend/ # Django backend
+
 └── frontend/ # React frontend
 
 🔧 Backend Setup (Django)
