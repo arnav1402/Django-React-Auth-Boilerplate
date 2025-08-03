@@ -1,0 +1,21 @@
+*.sqlite3
+db.sqlite3
+
+.env
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+.env.*
+
+# OS junk files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor config
+.vscode/
+.idea/
