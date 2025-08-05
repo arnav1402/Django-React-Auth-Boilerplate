@@ -1,65 +1,33 @@
-import React, { useState } from 'react';
+// App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './components/Login';
 import Register from './components/Register';
 import HomePage from './pages/Home';
-import './App.css'
+import './App.css';
 
 const App = () => {
-  const [currentView, setCurrentView] = useState('login'); // 'login', 'register', 'home'
-
-  const handleLoginSuccess = () => {
-    setCurrentView('home');
-  };
-
-  const handleRegisterSuccess = () => {
-    setCurrentView('home');
-  };
-
-  const handleSwitchToRegister = () => {
-    setCurrentView('register');
-  };
-
-  const handleSwitchToLogin = () => {
-    setCurrentView('login');
-  };
-
-  const handleRedirectToLogin = () => {
-    setCurrentView('login');
-  };
-
-  const renderCurrentView = () => {
-    switch (currentView) {
-      case 'register':
-        return (
-          <Register
-            onRegisterSuccess={handleRegisterSuccess}
-            onSwitchToLogin={handleSwitchToLogin}
-          />
-        );
-      case 'home':
-        return (
-          <ProtectedRoute onRedirectToLogin={handleRedirectToLogin}>
-            <HomePage />
-          </ProtectedRoute>
-        );
-      case 'login':
-      default:
-        return (
-          <Login
-            onLoginSuccess={handleLoginSuccess}
-            onSwitchToRegister={handleSwitchToRegister}
-          />
-        );
-    }
-  };
-
   return (
     <AuthProvider>
-      <div className="App">
-        {renderCurrentView()}
-      </div>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </div>
+      </Router>
     </AuthProvider>
   );
 };

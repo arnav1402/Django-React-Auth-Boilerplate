@@ -1,11 +1,13 @@
 // Login.jsx
 import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react';
 import '../styles/Login.css';
 
-const Login = ({ onLoginSuccess, onSwitchToRegister }) => {
+const Login = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -26,8 +28,8 @@ const Login = ({ onLoginSuccess, onSwitchToRegister }) => {
         setError('');
 
         try {
-            const response = await login(formData);
-            if (onLoginSuccess) onLoginSuccess(response);
+            await login(formData);
+            navigate('/');
         } catch (error) {
             console.error('Login failed:', error);
             setError(error.errors?.['non-field errors'] || error.error || 'Login failed. Please try again.');
@@ -75,7 +77,7 @@ const Login = ({ onLoginSuccess, onSwitchToRegister }) => {
 
                     <p className="register-link">
                         Don't have an account?
-                        <button type="button" onClick={onSwitchToRegister}> Sign up here</button>
+                        <button type="button" onClick={() => navigate('/register')}> Sign up here</button>
                     </p>
                 </div>
             </div>

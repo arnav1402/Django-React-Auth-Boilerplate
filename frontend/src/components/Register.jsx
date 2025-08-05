@@ -1,11 +1,13 @@
 // Register.jsx
 import React, { useState } from 'react';
 import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Register.css';
 import { Eye, EyeOff, Mail, Lock, User, UserPlus } from 'lucide-react';
 
-const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
+const Register = () => {
     const { register } = useAuth();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         first_name: '',
@@ -55,8 +57,8 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
         setErrors({});
 
         try {
-            const response = await register(formData);
-            if (onRegisterSuccess) onRegisterSuccess(response);
+            await register(formData);
+            navigate('/');
         } catch (error) {
             console.error('Registration failed:', error);
             if (error.email) setErrors({ email: error.email[0] });
@@ -86,7 +88,14 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
                             <label htmlFor="first_name">First Name</label>
                             <div className="input-wrapper">
                                 <User className="icon" />
-                                <input id="first_name" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First name" className={errors.first_name ? 'error' : ''} />
+                                <input
+                                    id="first_name"
+                                    name="first_name"
+                                    value={formData.first_name}
+                                    onChange={handleChange}
+                                    placeholder="First name"
+                                    className={errors.first_name ? 'error' : ''}
+                                />
                             </div>
                             {errors.first_name && <p className="error-text">{errors.first_name}</p>}
                         </div>
@@ -95,7 +104,14 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
                             <label htmlFor="last_name">Last Name</label>
                             <div className="input-wrapper">
                                 <User className="icon" />
-                                <input id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Last name" className={errors.last_name ? 'error' : ''} />
+                                <input
+                                    id="last_name"
+                                    name="last_name"
+                                    value={formData.last_name}
+                                    onChange={handleChange}
+                                    placeholder="Last name"
+                                    className={errors.last_name ? 'error' : ''}
+                                />
                             </div>
                             {errors.last_name && <p className="error-text">{errors.last_name}</p>}
                         </div>
@@ -105,7 +121,15 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
                         <label htmlFor="email">Email Address</label>
                         <div className="input-wrapper">
                             <Mail className="icon" />
-                            <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" className={errors.email ? 'error' : ''} />
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Enter your email"
+                                className={errors.email ? 'error' : ''}
+                            />
                         </div>
                         {errors.email && <p className="error-text">{errors.email}</p>}
                     </div>
@@ -114,8 +138,20 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
                         <label htmlFor="password">Password</label>
                         <div className="input-wrapper">
                             <Lock className="icon" />
-                            <input id="password" name="password" type={showPassword ? 'text' : 'password'} value={formData.password} onChange={handleChange} placeholder="Enter your password" className={errors.password ? 'error' : ''} />
-                            <button type="button" className="toggle-icon" onClick={() => setShowPassword(!showPassword)}>
+                            <input
+                                id="password"
+                                name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                value={formData.password}
+                                onChange={handleChange}
+                                placeholder="Enter your password"
+                                className={errors.password ? 'error' : ''}
+                            />
+                            <button
+                                type="button"
+                                className="toggle-icon"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
                                 {showPassword ? <EyeOff className="icon" /> : <Eye className="icon" />}
                             </button>
                         </div>
@@ -126,8 +162,20 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
                         <label htmlFor="password2">Confirm Password</label>
                         <div className="input-wrapper">
                             <Lock className="icon" />
-                            <input id="password2" name="password2" type={showPassword2 ? 'text' : 'password'} value={formData.password2} onChange={handleChange} placeholder="Confirm your password" className={errors.password2 ? 'error' : ''} />
-                            <button type="button" className="toggle-icon" onClick={() => setShowPassword2(!showPassword2)}>
+                            <input
+                                id="password2"
+                                name="password2"
+                                type={showPassword2 ? 'text' : 'password'}
+                                value={formData.password2}
+                                onChange={handleChange}
+                                placeholder="Confirm your password"
+                                className={errors.password2 ? 'error' : ''}
+                            />
+                            <button
+                                type="button"
+                                className="toggle-icon"
+                                onClick={() => setShowPassword2(!showPassword2)}
+                            >
                                 {showPassword2 ? <EyeOff className="icon" /> : <Eye className="icon" />}
                             </button>
                         </div>
@@ -135,18 +183,31 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
                     </div>
 
                     <div className="checkbox-wrapper">
-                        <input id="tc" name="tc" type="checkbox" checked={formData.tc} onChange={handleChange} />
-                        <label htmlFor="tc">I agree to the <span className="terms">Terms and Conditions</span></label>
+                        <input
+                            id="tc"
+                            name="tc"
+                            type="checkbox"
+                            checked={formData.tc}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="tc">
+                            I agree to the <span className="terms">Terms and Conditions</span>
+                        </label>
                     </div>
                     {errors.tc && <p className="error-text">{errors.tc}</p>}
 
-                    <button type="button" onClick={handleSubmit} disabled={loading} className="submit-button">
+                    <button
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                        className="submit-button"
+                    >
                         {loading ? <div className="spinner"></div> : <><UserPlus className="icon" />Create Account</>}
                     </button>
 
                     <p className="login-link">
                         Already have an account?
-                        <button type="button" onClick={onSwitchToLogin}> Sign in here</button>
+                        <button type="button" onClick={() => navigate('/login')}> Sign in here</button>
                     </p>
                 </div>
             </div>

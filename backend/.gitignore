@@ -1,6 +1,8 @@
 *.sqlite3
 db.sqlite3
 
+.venv
+
 .env
 
 # Python cache files
