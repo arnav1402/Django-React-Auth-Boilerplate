@@ -53,7 +53,7 @@ const Login = () => {
                     {error && <div className="error-box">{error}</div>}
 
                     <div className="field">
-                        <label htmlFor="email">Email Address</label>
+                        <label htmlFor="email" style={{ color: '#f5f7fa' }} >Email Address</label>
                         <div className="input-wrapper">
                             <Mail className="icon" />
                             <input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} placeholder="Enter your email" />
@@ -61,7 +61,7 @@ const Login = () => {
                     </div>
 
                     <div className="field">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password" style={{ color: '#f5f7fa' }} >Password</label>
                         <div className="input-wrapper">
                             <Lock className="icon" />
                             <input id="password" name="password" type={showPassword ? 'text' : 'password'} required value={formData.password} onChange={handleChange} placeholder="Enter your password" />

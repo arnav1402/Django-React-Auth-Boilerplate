@@ -1,4 +1,4 @@
-/* Home.css */
+/* Home.css
 body, html, #root {
   margin: 0;
   padding: 0;
@@ -204,4 +204,4 @@ body, html, #root {
 .modal-actions button:last-of-type:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
+} */

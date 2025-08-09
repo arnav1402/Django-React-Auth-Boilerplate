@@ -42,9 +42,20 @@ const Home = () => {
                 <section className="info-cards">
                     <div className="card">
                         <h3>Profile Information</h3>
-                        <p><strong>Email:</strong> {user?.email}</p>
-                        <p><strong>Full Name:</strong> {user?.first_name} {user?.last_name}</p>
-                        <p><strong>User ID:</strong> #{user?.id}</p>
+                        <div className="profile-info-list">
+                            <div className="profile-info-row">
+                                <span className="profile-info-label">Email:</span>
+                                <span className="profile-info-value">{user?.email}</span>
+                            </div>
+                            <div className="profile-info-row">
+                                <span className="profile-info-label">Full Name:</span>
+                                <span className="profile-info-value">{user?.first_name} {user?.last_name}</span>
+                            </div>
+                            <div className="profile-info-row">
+                                <span className="profile-info-label">User ID:</span>
+                                <span className="profile-info-value">#{user?.id}</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="card">
