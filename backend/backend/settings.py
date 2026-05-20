@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -149,4 +150,5 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "SIGNING_KEY": env('SECRET_KEY'),
+    "BLACKLIST_AFTER_ROTATION": True,
 }

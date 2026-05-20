@@ -7,6 +7,7 @@ export const REFRESH_TOKEN = "refresh_token";
 export const API_ENDPOINTS = {
     REGISTER: "/auth/register/",
     LOGIN: "/auth/login/",
+    LOGOUT: "/auth/logout/",
     PROFILE: "/auth/account/profile/",
     FORGOT_PASSWORD: "/auth/account/forgot-password/",
 };

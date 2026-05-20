@@ -80,9 +80,20 @@ class AuthService {
   }
 
   // Logout user
-  logout() {
-    localStorage.removeItem(ACCESS_TOKEN);
-    localStorage.removeItem(REFRESH_TOKEN);
+  async logout() {
+    try {
+      const refreshToken = this.getRefreshToken();
+      if (refreshToken) {
+        // Call logout endpoint to blacklist the refresh token
+        await api.post(API_ENDPOINTS.LOGOUT, { refresh: refreshToken });
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      // Clear tokens from localStorage regardless of API call success
+      localStorage.removeItem(ACCESS_TOKEN);
+      localStorage.removeItem(REFRESH_TOKEN);
+    }
   }
 
   // Handle API errors
